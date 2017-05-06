@@ -24,16 +24,15 @@ A development environment based upon docker.
 * Free software: Apache Software License 2.0
 * Documentation: https://devenv.readthedocs.io.
 
+Pre-Requirements
+----------------
 
-Features
---------
+* docker installed and running
+* the user you use to develop must have access to docker
 
-* HACK
-* total hack
-* no unit tests
 
 Inspirations
 ------------
 
-* vagrant
-* `cage`_
+* `vagrant<https://www.vagrantup.com/>`_
+* `cage<https://github.com/faradayio/cage>`_
