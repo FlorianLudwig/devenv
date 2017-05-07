@@ -2,11 +2,13 @@
 from __future__ import print_function, absolute_import
 
 import os
+import urllib.request
 
 import docker
 import click
 import yaml
 
+from devenv import config
 
 dock = docker.from_env()
 
@@ -29,6 +31,8 @@ def get_container_infos(config):
         container_config.update(default_container_config)
         container_config.update(config['run'][container_name])
         container_config['name'] = config['project_name'] + '-' + container_name
+        if container_config.get('user', None) == '$current':
+            container_config['user'] = os.getuid()
         yield container_config
 
 
@@ -52,12 +56,34 @@ def run(config):
 
             click.echo('starting container ' + container_config['name'])
         container_config['volumes'] = volumes
+
+        if container_config.get('user', 'root') not in ('root', 0):
+            env = container_config.setdefault('environment', {})
+            env.setdefault('HOME', '/tmp/')
         result = dock.containers.run(**container_config)
 
 
 @click.group()
 def main(args=None):
     """Console script for devenv"""
+
+
+@main.command()
+@click.argument('source')
+def clone(source):
+    if source.startswith('http'):
+        fd = urllib.request.urlopen(source)
+    elif os.path.exists(source):
+        fd = open(source)
+    else:
+        click.echo('Could not get {}'.format(source))
+        return 1
+
+    config_data = yaml.load(fd)
+    fd.close()
+    cfg = config.Config(config_data)
+    cfg.ensure_checkout('.')
+    return 0
 
 
 @main.command()

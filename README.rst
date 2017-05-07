@@ -30,6 +30,14 @@ Pre-Requirements
 * docker installed and running
 * the user you use to develop must have access to docker
 
+TODO, ideas and vision
+----------------------
+
+ * git integration
+ * ci integration (gitlab, travis, jenkins, ...)
+ * IDE integration (atom, intellij/pycharm)
+ * `langserv integration<http://langserver.org/>`_
+ * rpm and deb packages
 
 Inspirations
 ------------
