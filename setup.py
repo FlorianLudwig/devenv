@@ -23,7 +23,7 @@ test_requirements = [
 
 setup(
     name='devenv',
-    version='0.1.0',
+    version='0.1.1',
     description="A development environment based upon docker.",
     long_description=readme + '\n\n' + history,
     author="Florian Ludwig",
