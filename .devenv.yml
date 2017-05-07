@@ -1,0 +1,20 @@
+roject_name: devenv
+network_mode: host
+
+# where this file is found (= in repository "devenv")
+self: devenv
+
+# definition of repositories related to this project
+repos:
+  devenv:
+    git: git@github.com:FlorianLudwig/devenv.git
+
+
+# what containers to run during development
+run:
+  webserver:
+    image: python
+    command: bash -c "cd /src; python -m http.server"
+    working_dir: /src
+    volumes:
+      - .:/src
