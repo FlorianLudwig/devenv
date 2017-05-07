@@ -66,6 +66,8 @@ def run(config):
 @click.group()
 def main(args=None):
     """Console script for devenv"""
+    click.echo('WARNING: ALPHA STAGE')
+    click.echo('Unstalbe.  API and config format might (and probably will) change.')
 
 
 @main.command()
